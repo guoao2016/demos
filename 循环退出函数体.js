@@ -1,3 +1,4 @@
+//1. 退出循环，不退出函数体
 function test() {
   let arr = [1, 2, 3];
   arr.forEach(val => {
@@ -9,6 +10,7 @@ function test() {
   console.log("end");
 }
 
+//2. 退出函数体
 function test() {
   let arr = [1, 2, 3];
 
@@ -21,6 +23,7 @@ function test() {
   console.log("end");
 }
 
+//2. 退出函数体
 function test() {
   let arr = [1, 2, 3];
 
