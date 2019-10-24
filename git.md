@@ -49,6 +49,7 @@
 
 
 5. git stash
+
     查看
     git stash list 
     恢复 - 删除
@@ -57,6 +58,11 @@
 
     恢复的同时把stash内容删除
     git stash pop
+    
+    指定
+    git stash apply stash@{1} 
+    清空队列
+    git stash clea
 
 
 6. git tag
