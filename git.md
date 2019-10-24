@@ -57,19 +57,19 @@
 
 6. git tag
 
-默认标签是打在最新提交的commit上的。
-git tag v1.0
+    默认标签是打在最新提交的commit上的。
+    git tag v1.0
 
-指定commit  git tag (v)  (commit id)
-git tag v0.9   f52c633
+    指定commit  git tag (v)  (commit id)
+    git tag v0.9   f52c633
 
-还可以创建带有说明的标签，用-a指定标签名，-m指定说明文字：
-git tag -a v0.1  -m 'version 0.1 released'   f52c633
+    还可以创建带有说明的标签，用-a指定标签名，-m指定说明文字：
+    git tag -a v0.1  -m 'version 0.1 released'   f52c633
 
 
-删除标签
+    删除标签
 
-git tag -d v0.1
+    git tag -d v0.1
 
 
     因为创建的标签都只存储在本地，不会自动推送到远程。所以，打错的标签可以在本地安全删除。
