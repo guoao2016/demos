@@ -1,3 +1,7 @@
+参考：http://gitbook.liuhui998.com/index.html
+
+
+
 1. git reset 版本回退
 
     回退到上一版本
