@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片懒加载</title>
+    <style>
+        .wrap {
+            height: 3000px;
+            background-color: rebeccapurple;
+        }
+
+        p {
+            height: 200px;
+        }
+
+        img {
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='wrap'>图片懒加载</div>
+    <div class="img-container">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi officia soluta dolore labore placeat, tempore
+            cupiditate eveniet accusamus? Delectus dignissimos rerum voluptatem laborum ipsum enim suscipit ducimus
+            quam, fuga doloremque.</p>
+        <img data-src="./1.jpg">
+      
+    </div>
+    <div class="img-container">
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam laboriosam vero quo quisquam. Vel neque
+            dolores animi ducimus, modi ullam sequi ea labore accusamus asperiores suscipit repellat id quidem aliquid?
+        </p>
+        <img data-src="./2.jpg">
+    </div>
+    <div class="img-container">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio necessitatibus accusamus delectus a,
+            dignissimos, laboriosam repellendus libero eum, provident quas eos veniam dolorum ut iure. Odio saepe amet
+            veritatis recusandae.</p>
+        <img data-src="./3.jpg">
+    </div>
+    <script>
+        let imgs = document.querySelectorAll('img');
+        let num = 0;
+        let viewHeight = window.innerHeight || window.documentElement.clientHeight;
+
+
+        let debounce = (func, wait = 500) => {
+            let timer = 0;
+
+            return (...args) => {
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                timer = setTimeout(() => {
+                    func.apply(this, args)
+                }, wait)
+            }
+
+        }
+        
+        function loadImg() {
+            console.log(imgs[0].getBoundingClientRect().top)
+            for (let i = 0, len = imgs.length; i < len; i++) {
+                let dis = viewHeight - imgs[i].getBoundingClientRect().top;
+                if (dis > 0 && ! imgs[i].src) {
+                    imgs[i].src = imgs[i].getAttribute('data-src');
+                    num  = i +1
+                }
+            }
+        }
+
+        window.addEventListener('scroll', 
+            debounce(() => { loadImg() })
+        )
+    </script>
+</body>
+
+</html>
