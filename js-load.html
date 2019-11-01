@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            height: 200px;
+            background-color:rebeccapurple;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=> {
+            console.log('DOMContentLoaded')
+        })
+
+        window.onload = () => {
+            console.log('onload')
+        }
+    </script>
+    <!-- <script  src="./test.js"></script> -->
+    <script defer src="./test.js"></script>
+    <!-- 严格按照<script>脚本顺序加载，但会延迟执行JS脚本，即加载完成后继续解析文档，文档解析完成后再执行JS脚本。 -->
+    <!-- <script async = "async" src="./test.js"></script> -->
+    <!-- 这是HTML 5新定义的<script>属性。当渲染引擎解析文档时，遇到script标签不会停止解析，而是继续解析，同时并行加载<script>标签中请求的资源。当<script>中的资源加载完成后，此时渲染浏览器才会暂停解析文档，将控制权交给JS引擎，执行指定脚本文件，执行完成后再移交控制权给渲染引擎继续解析文档（解析未完成的情况下 -->
+    
+    <div>
+        defer--async
+    </div>
+    <div>
+            defer--async
+        </div>
+    
+        <div>
+                defer--async
+            </div>
+            <div>
+                    defer--async
+                </div>
+                        
+    
+</body>
+</html>
