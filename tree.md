@@ -1,5 +1,5 @@
 mddir
-https://guoao2016.github.io/demos/
+https://guoao2016.github.io/demos/lazy-load/index.html
 
 |-- undefined
     |-- git.md
