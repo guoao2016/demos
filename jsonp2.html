@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>JSONP 实例</title>
+</head>
+
+<body>
+    <div id="divCustomers"></div>
+    <script type="text/javascript">
+        function callbackFunction(result, methodName) {
+            console.log(result)
+            var html = `
+                <p>name: ${result.name}</p>
+                <p>company: ${result.company}</p>
+            `;
+           
+            document.getElementById('divCustomers').innerHTML = html;
+        }
+    </script>
+    <script type="text/javascript" src="http://localhost:10011/?callback=callbackFunction"></script>
+</body>
+
+</html>
