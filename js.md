@@ -125,3 +125,12 @@
 43. 箭头函数ES5如何实现
 
     箭头函数和普通函数的区别
+    
+44. 一道 setTimeout/Promise 输出顺序问题的题
+    console.log('one');
+    setTimeout(function() {
+      console.log('two');
+    }, 0);
+    Promise.resolve().then(function() {
+      console.log('three');
+    })
