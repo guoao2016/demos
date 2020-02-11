@@ -91,4 +91,50 @@
     删除远程
     git tag -d v0.9
     git push origin :refs/tags/v0.9
+    
+    
+### git submodule
+1. git status
+    发现子模块有修改
+    git submodule update --remote
+2. [子模块修改，提交](https://segmentfault.com/a/1190000020297996)
 
+
+有些时候你需要对submodule做一些修改，很常见的做法就是切到submodule的目录，然后做修改，然后commit和push。
+
+这里的坑在于，默认git submodule update并不会将submodule切到任何branch，
+所以，默认下submodule的HEAD是处于游离状态的(‘detached HEAD’ state)。
+
+```
+cd src/libs
+-- 所以在修改前，记得一定要用 
+
+git checkout master
+-- 将当前的submodule分支切换到master，
+-- 然后才能做修改和提交。
+    git add .
+    git commit - m ''
+    git push
+```
+
+
+
+如果你不慎忘记切换到master分支，又做了提交，可以用cherry-pick命令挽救。具体做法如下：
+
+    1. 用 git checkout master 将HEAD从游离状态切换到 master 分支, 这时候，git会报Warning说有一个提交没有在branch上，记住这个提交的change-id（假如change-id为 aaaa)
+    2. 用 git cherry-pick aaaa 来将刚刚的提交作用在master分支上
+    3. 用 git push 将更新提交到远程版本库中
+
+2. 删除子仓库
+    1. 删除.gitsubmodule里相关部分
+    2. 删除.git/config 文件里相关字段
+    3. 删除子仓库目录。
+
+3. 日常操作
+    . clone 父仓库的时候加上 --recursive，会自动初始化并更新仓库中的每一个子模块
+        git clone --recursive https://gitee.com/xiaomumaozi/SubModule_Test.git
+    . 父仓库执行git pull    
+        git status
+        如果发现submodule 有修改，执行
+
+        git submodule update --remote
