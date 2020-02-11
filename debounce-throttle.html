@@ -5,8 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>debounce-throttle</title>
+     <style>
+        .wrap{
+            height: 5000px;
+            background-color: blueviolet;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="wrap">
+    </div>
+    <script>
+        function debounce(func, wait = 500) {
+            let timer = 0;
+            return (...arg) => {
+                if(timer){
+                    clearTimeout(timer)
+                }
+
+                timer = setTimeout(() => {
+                    func.apply(this, arg)
+                    }, wait)
+            }
+        }
+
+
+        function test(){
+            console.log(111)
+        }
+
+        window.addEventListener('scroll', debounce(test))
+    </script>
 </body>
 </html>
