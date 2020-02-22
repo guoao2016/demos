@@ -46,14 +46,9 @@
         <img data-src="./3.jpg">
     </div>
     <script>
-        let imgs = document.querySelectorAll('img');
-        let num = 0;
-        let viewHeight = window.innerHeight || window.documentElement.clientHeight;
-
 
         let debounce = (func, wait = 500) => {
             let timer = 0;
-
             return (...args) => {
                 if (timer) {
                     clearTimeout(timer)
@@ -64,14 +59,23 @@
             }
 
         }
-        
-        function loadImg() {
+
+
+        let imgs = document.querySelectorAll('img');
+        let viewHeight = window.innerHeight || window.documentElement.clientHeight;
+
+       
+        let num = 0;
+        // num用于统计当前显示到哪一张图片，避免每次都从第一张图片开始检查是否露出
+        function lazyLoad() {
             console.log(imgs[0].getBoundingClientRect().top)
-            for (let i = 0, len = imgs.length; i < len; i++) {
+
+            for (let i = num, len = imgs.length; i < len; i++) {
+                // 用可视区域的高度减去元素顶部距离可视区域顶部的高度，说明元素露出
                 let dis = viewHeight - imgs[i].getBoundingClientRect().top;
                 if (dis > 0 && ! imgs[i].src) {
                     imgs[i].src = imgs[i].getAttribute('data-src');
-                    num  = i +1
+                    num  = i + 1
                 }
             }
         }
