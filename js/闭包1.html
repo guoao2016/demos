@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包</title>
+</head>
+
+<body>
+    <script>
+        /**
+        闭包是指有权访问另一个函数作用域中的变量的函数。
+        
+        */
+        // [参考一](https://zhuanlan.zhihu.com/p/56490498)
+        // [参考二](https://blog.fundebug.com/2017/07/31/javascript-closure/)
+
+        // 1
+        function createCounter() {
+            let counter = 0
+            const myFunction = function () {
+                counter = counter + 1
+                return counter
+            }
+            return myFunction
+        }
+
+        const increment = createCounter()
+        const c1 = increment()
+        const c2 = increment()
+        const c3 = increment()
+        console.log('example increment', c1, c2, c3)
+
+
+
+        // 2 多个计数器
+        function createCounter() {
+            var counter = 0;
+
+            function increment() {
+                counter = counter + 1;
+                console.log("Number of events: " + counter);
+            }
+
+            return increment;
+        }
+
+        var counter1 = createCounter();
+        var counter2 = createCounter();
+
+        counter1(); // Number of events: 1
+        counter1(); // Number of events: 2
+        counter2(); // Number of events: 1
+        counter1(); // Number of events: 3
+
+
+
+        // 3 优化
+         /**
+         * 1. 显示定时器名字
+         * 2. increment
+         * 3. decrement
+         * */
+        function createCounter(counterName) {
+            var counter = 0;
+
+            function display(){
+                console.log("Number of " + counterName + ": " + counter);
+            }
+
+            function increment() {
+                counter = counter + 1;
+                display()
+            }
+
+            function decrement() {
+                counter = counter - 1;
+                display()
+            }
+
+            return {
+                increment: increment,
+                decrement: decrement
+            };
+        }
+
+        var dogsCounter = createCounter("dogs");
+
+        dogsCounter.increment(); // Number of dogs: 1
+        dogsCounter.increment(); // Number of dogs: 2
+        dogsCounter.decrement(); // Number of dogs: 1
+
+
+        var dogsCounter = createCounter("dogs");
+        dogsCounter.display(); // ERROR !!!
+
+
+
+
+
+        /**
+         * 1. 显示定时器名字
+         * 2. increment
+         * 3. decrement
+         * */
+        function createCounter(counterName){
+            var count = 0;
+            function play(){ 
+                console.log(counterName + ':' + count)
+            }
+            function increment(){
+                count = count + 1;
+                play();
+            }
+            function decrement(){
+                count = count 1 1;
+                play();
+            }
+            return {
+                increment: increment,
+                decrement: decrement
+            }
+        }
+        var ct1Counter = createCounter('ct1');
+        ct1Counter.increment();
+
+    </script>
+</body>
+
+</html>

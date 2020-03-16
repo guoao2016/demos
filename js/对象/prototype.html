@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>prototype</title>
+</head>
+
+<body>
+    <script>
+        //引用类型中都包含有prototype属性，该属性指向对象
+
+        // function Student(name, age, country) {
+        //     this.name = name;
+        //     this.age = age;
+        //     this.country = country;
+        //     this.greet = function () {
+        //         console.log(this.name)
+        //     }
+        // }
+        var obj = {
+            country: "中国"
+        }
+        function Student(name, age) {
+            this.name = name;
+            this.age = age;
+            this.greet = function () {
+                console.log(this.name)
+            }
+        }
+        Student.prototype = obj;//把Student的原型设置为obj对象
+        var stu1 = new Student("张三", 22);
+        var stu2 = new Student("李四", 23);
+        console.log(Student.prototype);
+        alert(stu1.country)
+        console.log(stu2.__proto__)
+        console.log(stu2.__proto__.country)
+        // 国家共享--优化内存占用(公共部分定义在prototype上)
+
+    </script>
+</body>
+
+</html>

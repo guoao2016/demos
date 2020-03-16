@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>__proto__</title>
+</head>
+<body>
+    <script>
+        // http://www.ituring.com.cn/article/56184
+        // 1.
+        var Point1 = {
+            x: 0,
+            y: 0,
+            print: function(){console.log(this.x , this.y)}
+        };
+        var p = {x: 10, y: 20, __proto__: Point1};
+        p.print();
+
+        // 令人困惑的是，每个教授原型继承的人都不会给出上面那样的代码，反而会给出下面这样的代码：
+        function Point(x, y){
+            this.x = x;
+            this.y = y;
+        }
+        Point.prototype = {
+            print: function(){console.log(this.x, this.y)}
+        }
+        var p = new Point(10, 20);
+        p.print();
+    </script>
+</body>
+</html>

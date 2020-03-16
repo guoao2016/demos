@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>深入理解原型</title>
+</head>
+<body>
+<script>
+    var obj={
+        country:"中国",
+        name:"上级"
+    }
+    function Student(name,age){
+        this.name=name;
+        this.age=age;
+        this.greet=function(){
+            console.log(this.name)
+        }
+    }
+    Student.prototype=obj;//把Student的原型设置为obj对象
+    var stu1=new Student("张三",22);
+    var stu2=new Student("李四",23);
+//    alert(Student.prototype);
+//    alert(stu1.country)
+//    alert(stu2.__proto__)
+    //国家共享--优化内存占用
+//    alert(stu1.__proto__.__proto__);//object object
+//    alert(obj.__proto__);//object object
+//    alert(obj.__proto__.__proto__) //null 得到object的原型对象的原型对象
+
+//判断一个对象是否指向了构造函数的原型对象
+alert(Student.prototype.isPrototypeOf(stu1))
+
+    alert(stu1.name);//stu1对象的属性
+
+    //删除stu1的name
+    delete stu1.name;
+    alert(stu1.name);//使用原型对象中的name
+
+    alert( stu1.hasOwnProperty("name")); //false
+
+    alert("name" in stu1);//true 自身或原型中含有name属性都会返回true
+
+
+</script>
+</body>
+</html>

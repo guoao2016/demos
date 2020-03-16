@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clone</title>
+</head>
+<body>
+</body>
+    <script>
+        var obj1 = {a :1 }
+        var obj2 = {a: 2, b: {test:1}}
+
+         // Object.assign() 浅克隆
+        var objClone = Object.assign({}, obj1)
+        objClone.a = 3;
+        var objClone2 = Object.assign({}, obj2)
+        objClone2.a =3;
+        objClone2.b.test =3;
+
+
+       
+        // JSON.stringify()
+        // JSON.parse()
+        var cloneDeep = JSON.parse(JSON.stringify(obj2)) ;
+
+    </script>
+</body>
+</html>

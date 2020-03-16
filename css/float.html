@@ -17,9 +17,12 @@
         .super {
             border: 1px solid blue;
         }
-        .super:after{
-            
-        }
+
+        .super:after {
+            content:' ';
+            display:'table';
+            clear: 'both';
+         }
 
         .sub {
             float: left;
@@ -32,6 +35,34 @@
 </head>
 
 <body>
+    <div>
+        // 三种方式
+        1. 父级添加overflow属性（父元素添加overflow:hidden）（不推荐）
+        2. 父级底部添加元素 clear: both;
+        3. 父元素设置 :after
+
+        .clearfix:before,
+        .clearfix:after {
+            content: " ";
+            display: table;
+        }
+        
+        /**
+        * For IE 6/7 only
+        */
+
+        .clearfix:after {
+            clear: both;
+        }
+
+
+
+.clearfix {
+    *zoom: 1;
+}
+    </div>
+     
+   
     <div>
         test
     </div>
@@ -55,7 +86,13 @@
 
     <div class="super">
         <div class="sub"></div>
+        <div class="sub"></div>
+        <div class="sub"></div>
     </div>
+    <div>
+        test-end
+    </div>
+</body>
 </body>
 
 </html>

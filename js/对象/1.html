@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象1</title>
+</head>
+
+<body>
+    <script>
+        // 1.面对过程（函数式编程） 2.面向对象
+        //1.创建对象
+        var stu1 = new Object();
+        stu1.name = "张三";
+        stu1.age = 23;
+        stu1.greet = function () {
+            alert("我叫" + this.name + "今年" + this.age + ",完毕")
+        }
+        //    alert(stu1.name);
+        //    alert(stu1.age);
+        //    stu1.greet();
+
+        var stu2 = new Object();
+        stu2.name = "李四";
+        stu2.age = 24;
+        stu2.greet = function () {
+            alert("我叫" + this.name + "今年" + this.age + ",完毕")
+        }
+        //    alert(stu2.name);
+        //    alert(stu2.age);
+        //    stu2.greet();
+
+
+        /**
+         * 重复创建
+         */
+        //   2 使用工厂模式
+        function crearObj(name, age) {
+            var obj = new Object();
+            obj.name = name;
+            obj.age = age;
+            obj.greet = function () {
+                alert("我叫" + this.name + "今年" + this.age + ",完毕")
+            }
+            return obj;
+        }
+        var stu3 = crearObj("老王", 24);
+        var stu4 = crearObj("老王-2", 25);
+        //    alert(stu3.name);
+        //    alert(stu3.age);
+        //    stu3.greet();
+        //    alert(stu4.name);
+        //    alert(stu4.age);
+        //    =stu4.greet();
+
+        // 缺点无法知道对象的类型
+
+        //   3.构造函数
+        function Student(name, age) {
+            this.name = name; //后台创建了new Object()
+            this.age = age;   //this 就指向了这个对象
+            this.greet = function () {
+                alert(this.name + "," + this.age)
+
+            } //后台返回了该对象
+        }
+        var stu11 = new Student("曹东", 25);
+        //    alert(stu11.name);
+        //    alert(stu11.age);
+        //    stu11.greet();
+
+        /*使用构造函数和工厂模式的区别：
+        * 1.构造函数方法没有显示的创建对象（new Object()）
+        * 2.直接将属性和方法赋值给this对象;
+        * 3.没有return 语句
+        * */
+
+        var stu12 = new Student("小主", 25);
+        //    alert(stu12.name);
+        //    alert(stu12.age);
+        //    stu12.greet();
+
+        /*构造函数的特点：
+        * 1.首字母大写（为了和普通函数区分）
+        * 2.使用构造函数必须使用new
+        * 3.把构造函数当普通函数没意义（无return）
+        * */
+        //    类型判断
+        //    alert(typeof stu11);
+        //    alert(stu11 instanceof Student);
+        //
+        //    alert(stu1.greet==stu2.greet);//falae  引用类型
+
+
+
+
+        function gc(name, age) {
+            var obj = {};
+            obj.name = name;
+            obj.age = age;
+            return obj;
+        }
+        var lilei = gc('lilei', 12);
+        console.log(lilei);
+        var xiaoming = gc('xiaoming', 13);
+        console.log(xiaoming);
+        console.log(typeof xiaoming);
+
+        function Gz(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        var tom = new Gz('tom', 14);
+        console.log(tom);
+        console.log(tom instanceof Gz);
+
+
+        // 工厂模式继承
+        var Sstudent = {
+            name: 'Robot',
+            height: 1.2,
+            run: function () {
+                console.log(this.name + 'is running...');
+            }
+        };
+        function createStudent(name) {
+            var s = Object.create(Sstudent);
+            s.name = name;
+            return s;
+        }
+        var xiaoming = createStudent('小明');
+        xiaoming.run();
+        xiaoming.__proto__ === Sstudent;
+    </script>
+</body>
+
+</html>

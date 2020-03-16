@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+</head>
+<body>
+    <!-- <script>
+        function fn(resolve){
+            setTimeout(function(){
+                resolve(123);
+            },1000)
+        }
+        let p0 = new Promise(fn);
+        let p1= Promise.resolve(p0)
+
+        // Promise.all
+        p0.then(res => console.log(res))
+            .catch(err => console.log(err))
+
+        /**
+            结合现实生活 
+            买菜-做饭-送饭
+        */
+
+        function buy(resolve, reject){
+            setTimeout(function(){
+                resolve(['西红柿','鸡蛋','油菜'])
+            }, 2000)
+        }
+
+        function cook(resolve, reject){
+            setTimeout(function(){
+                //对做好的饭进行下一步处理。
+                resolve({
+                    zs: '米饭',
+                    cai: ['西红柿鸡蛋','清炒油菜']
+                })
+            }, 2000)
+        }
+
+        function song(resolve, reject){
+            setTimeout(function(){
+                resolve('吃饭')
+
+            }, 2000)
+        }
+
+
+        new Promise(buy)
+        .then(res => {
+            // 买好的菜
+            console.log(res)
+            return new Promise(cook)
+        })
+        .then(res => {
+            // 做好的饭
+            console.log(res)
+            return new Promise(song)
+        })
+        .then(res => {
+            console.log(res)
+        })
+    </script>
+         -->
+   
+   
+   <script>
+        // Promise.all
+      
+
+        let p1 = new Promise((resolve, reject) => {
+            resolve('成功了')
+        })
+
+        let p2 = new Promise((resolve, reject) => {
+            resolve('success')
+        })
+
+        let p3 = Promise.reject('失败')
+
+        Promise.all([p1, p2]).then((result) => {
+            console.log(result)
+        }).catch((error) => {
+            console.log(error)
+        })
+
+        Promise.all([p1, p3, p2]).then((result) => {
+            console.log(result)
+        }).catch((error) => { 
+            console.log(error)
+        })
+
+       function p4(){
+           return  new Promise((resolve, reject) => {
+                setTimeout(function(){
+                    resolve('ok')
+                }, 1000)
+            })
+       }
+
+       async function test(){
+            let n = await p4();
+            console.log(n)
+       }
+       
+       test()
+       console.log('end------------')
+    </script>
+</body>
+</html>

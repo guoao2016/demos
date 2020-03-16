@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var person = new Object();
+        person.name = 'Nicholas';
+        console.log(person.name) // Nicholas
+
+        // 不能给基本类型的值添加属性，尽管这样做不会导致任何错误
+
+        var name = 'Nicholas';
+        name.age = 27;
+        console.log(name.age); // undefined
+
+
+        // 二 所有函数的参数都是按值传递
+        // 因为访问变量有按值和按引用两种方式，而参数只能按值传递
+        // 1. 基本类型
+        function addTen(num){
+            num += 10;
+            return num;
+        }
+        var count = 20;
+        var result = addTen(count);
+        console.log(count);
+        console.log(result);
+
+        /**
+         * 2.1 引用类型  按值传递  
+         * （把这个值在内存中的地址复制给一个局部变量，因此这个局部变量的变化会反映在函数的外部。）
+         * 
+        */
+        
+
+        function setName(obj){
+            obj.name = 'Nicholas';
+        }
+
+        var person = new Object();
+        setName(person);
+        console.log(person.name);
+
+        // 2.2 
+        function setName(obj){
+            obj.name = 'Nicholas';
+            obj = new Object();
+            obj.name = 'Greg';
+            // 甚至直接改变类型
+            obj = 001;
+        }
+
+        var person = new Object()
+        setName(person);
+        console.log(person.name) 
+
+
+        // 对比
+        var person = new Object();
+        var person1 = person;
+
+        console.log(person1)
+        person1.name = 'Nicholas'
+        console.log(person1)
+        console.log(person)
+
+        person1 = new Object()
+        person1.name = 'Greg'
+        console.log(person1)
+        console.log(person)
+
+
+        
+    </script> 
+</body>
+</html>

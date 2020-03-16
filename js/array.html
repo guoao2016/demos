@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array</title>
+</head>
+<body>
+<script>
+        
+/**
+ * 5.2.6 操作方法
+ * concat 不改变原数组，返回拼接后的数组
+ * slice 不改变原数组，返回截取数组， 含头不含尾
+ * splice  删除、插入、替换
+ * 
+*/
+var colors = ['red', 'green', 'blue'];
+colors.concat('black');
+colors.slice(0, 2);
+// colors.splice(0,1)
+// colors.splice(2,0, 'blue1')  //["red", "green", "blue1", "blue"]
+// colors.splice(2,1, 'blue1')
+
+/*
+ * 5.2.7 位置方法
+ * indexOf
+ * lastIndexOf
+ */
+
+var numbers = [1,2,3,4,5,4,3,2,1]
+numbers.indexOf(4); // 3
+numbers.lastIndexOf(4) // 5
+numbers.indexOf(4, 4)   // 5
+numbers.lastIndexOf(4, 4) // 3
+
+/**
+ * 5.2.8 迭代方法
+ * every
+ * some
+ * filter
+ * forEach
+ * map
+ * 
+*/
+
+
+</script>
+</body>
+</html>
+
+

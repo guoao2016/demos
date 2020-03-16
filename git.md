@@ -43,6 +43,11 @@
 
     此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
 
+ 
+    github  deploy keys
+    ssh-keygen -t rsa -C "1044914567@qq.com"
+    id_rsa.pub
+
 
 4. 删除分支
     git branch -d <branch name>删除本地分支，再通过git push origin :<branch name>

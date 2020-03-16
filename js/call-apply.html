@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>call - apply</title>
+</head>
+
+<body>
+    <script>
+        function test(msg) {
+            alert(msg);
+        }
+        var f = test;
+        //    f('hello');
+
+        //this:是一种引用，指向函数被调用时的对象
+        var name = 'zhangsan';
+        function show() {
+            alert(name);
+        }
+        //    window.show(); //window对象  this指向的就是window对象
+
+        var obj = {
+            name: 'list',
+            show: function () {
+                alert(this.name)
+            }
+        }
+        //    obj.show();  //this指向的是obj对象
+        var color = '红色';
+        function fun() {
+            alert(this.color);
+        }
+        var objs = {
+            color: '蓝色',
+        };
+        //    window.fun(); //this指向的是window对象
+
+        //    obj.show();  //this指向的是obj对象
+        var color = '红色';
+        function fun() {
+            alert(this.color);
+        }
+        var objs = {
+            color: '蓝色',
+        };
+        window.fun(); //this指向的是window对象
+
+
+        //    objs.showCloor=fun;
+        //    objs.showCloor();
+
+        // 2 Function 内部有一个prototype属性，
+        // 该属性含有两个方法call() apply()
+
+        function sum(num1, num2) {
+            return num1 + num2;
+        }
+        function show1(num1, num2) {
+            return sum.call(this, num1, num2);
+            //第一个参数是调用sum函数的对象，后面的参数是传递给sum的实际数据
+        }
+        function show2(num1, num2) {
+            return sum.apply(this, [num1, num2]);
+            //第一个参数是调用sum函数的对象
+        }
+      
+        //    alert(show1(10, 1));
+        //    alert(show2(10, 2))
+
+
+        //    可以用call() apply() 方法改变调用函数的对象
+        function test(a) {
+            this.name = a;
+        }
+        test('window');
+        alert(window.name)
+        var obj1 = {}, obj2 = {};
+        test.call(obj1, 'zhangsan'); //this指向obj1    最佳实践
+        test.call(obj2, 'lisi'); //this指向obj2    最佳实践
+        alert(obj1.name);
+        alert(obj2.name);
+
+
+        var xiaoming = {
+            name: '小明',
+            birth: 1990,
+            age: getAge
+        };
+        function getAge() {
+            var y = new Date().getFullYear();
+            return y - this.birth;
+        }
+        xiaoming.age();
+        getAge.apply(xiaoming, []);
+        getAge.call(xiaoming, null);
+
+
+        //    可以用call() apply() 方法改变调用函数的对象
+        function test(a) {
+            this.name = a;
+        }
+        test('window');
+        //    alert(window.name)
+        var obj1 = {}, obj2 = {};
+        test.call(obj1, 'zhangsan'); //this指向obj1    最佳实践
+        test.call(obj2, 'lisi'); //this指向obj2    最佳实践
+//    alert(obj1.name);
+//    alert(obj2.name);
+    </script>
+</body>
+
+</html>

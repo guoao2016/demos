@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包</title>
+</head>
+
+<body>
+    <script>
+
+        var scope = "global scope"; // 全局变量
+        function checkscope() {
+            var scope = "local scope" // 局部变量
+            // function f(){ return scope;}  // 在作用域中返回这个值
+            function f() { console.log(scope) }  // 在作用域中返回这个值
+            return f();
+        }
+        checkscope();
+
+
+        var scope = "global scope"; // 全局变量
+        function checkscope() {
+            var scope = "local scope" // 局部变量
+            // function f(){ return scope;}  // 在作用域中返回这个值
+            function f() { console.log(scope) }  // 在作用域中返回这个值
+            return f;
+        }
+        checkscope()();  
+
+
+        // 闭包就是函数可以访问其声明时所在作用域内的变量，根据这个特性可以在函数内返回一个函数，通过这个被返回的函数可以在函数外部访问函数内的变量；
+        // 根据作用域链，当函数访问变量时先在自身作用域内查找，若没有则向外层函数的作用域查找，依此类推，直到找到全局作用域为止，因为c函数作用域内有a,所以c函数内的a和fwx的a并不一样，而i是fwx内的i
+        
+
+        function add() {
+            var counter = 0;
+            return counter += 1;
+        } 
+        add();
+        add();
+        add();// 本意是想输出 3, 但输出的都是 1 
+        var uniqueInteger = (function(){
+            var counter = 0;
+            return function(){ return counter++;}
+        }())
+        var add = uniqueInteger;
+        add();
+
+        // 闭包总结 ：保护和重用函数内部变量，函数内部返回一个操作函数内部变量的函数
+
+        
+    </script>
+</body>
+
+</html>
