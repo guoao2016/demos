@@ -1,0 +1,142 @@
+<section class="im">
+    <div class="box">
+        <div nz-row>
+            <form nz-col [nzSm]="12" [nzXs]="24" nz-form [formGroup]="validateForm" autocomplete="off">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="input-label-width">
+                        <label for="title" nz-form-item-required>标题</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="19" [nzXs]="24" nzHasFeedback [nzValidateStatus]="getFormControl('title')">
+                        <nz-input [nzSize]="'large'" formControlName="title" [nzId]="'title'" [nzPlaceHolder]="'请输入标题'"></nz-input>
+                        <div nz-form-explain *ngIf="getFormControl('title').dirty&&getFormControl('title').hasError('required')">
+                            请输入标题
+                        </div>
+                        <div nz-form-explain *ngIf="getFormControl('title').dirty&&getFormControl('title').hasError('maxlength')">
+                            字符长度不能超过27
+                        </div>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="input-label-width">
+                        <label for="subtitle" nz-form-item-required>副标题</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="19" [nzXs]="24" nzHasFeedback [nzValidateStatus]="getFormControl('subtitle')">
+                        <nz-input [nzSize]="'large'" formControlName="subtitle" [nzId]="'subtitle'" nzType="textarea" nzAutosize [nzPlaceHolder]="'请输入副标题'"></nz-input>
+                        <div nz-form-explain *ngIf="getFormControl('subtitle').dirty&&getFormControl('subtitle').hasError('required')">
+                            请输入副标题
+                        </div>
+                        <div nz-form-explain *ngIf="getFormControl('subtitle').dirty&&getFormControl('subtitle').hasError('maxlength')">
+                            字符长度不能超过70
+                        </div>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="input-label-width">
+                        <label for="titleIcon" nz-form-item-required>标题图</label>
+                    </div>
+                    <div nz-col [nzSm]="2" [nzXs]="19" class="upload_icon">
+                        <input type="file" class="input_icon" accept="image/*" (change)="fileReader(inputIcon.files, 'title')" #inputIcon>
+                        <button nz-button type="button" [nzType]="'primary'">浏览</button>
+                        <nz-tooltip [nzTitle]="'标题图大小不超过500kb'">
+                            <i nz-tooltip class="anticon anticon-question-circle-o question-icon"></i>
+                        </nz-tooltip>
+                    </div>
+                    <div *ngIf="titleIcon" nz-col [nzSm]="2" [nzXs]="10">
+                        <nz-popover [(nzVisible)]="iconVisible" [nzTitle]="'标题图'" [nzTrigger]="'click'" [nzPlacement]="'rightBottom'">
+                            <img [src]="titleIcon" nz-popover (click)="iconVisible = false" class="preview-img" alt="标题图">
+                            <ng-template #nzTemplate>
+                                <img style="width:300px;" [src]="titleIcon" alt="标题图">
+                            </ng-template>
+                        </nz-popover>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="3" [nzXs]="24" class="input-label-width">
+                        <label for="author" nz-form-item-required>作者</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="19" [nzXs]="24" nzHasFeedback [nzValidateStatus]="getFormControl('author')">
+                        <nz-input [nzSize]="'large'" formControlName="author" [nzId]="'author'" [nzPlaceHolder]="'请输入作者'"></nz-input>
+                        <div nz-form-explain *ngIf="getFormControl('author').dirty&&getFormControl('author').hasError('required')">
+                            请输入作者
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- 编辑显示退回原因 -->
+            <div nz-col [nzSm]="12" [nzXs]="24" nz-row *ngIf="showReson">
+                <span nz-col [nzSpan]="4" style="max-width: 64px;">退回原因：</span>
+                <span nz-col [nzSpan]="20"> {{rejectReason}}</span>
+            </div>
+        </div>
+
+        <!-- 富文本 -->
+        <div nz-row>
+            <div nz-form-control nz-col [nzOffset]="1" [nzSm]="22" [nzXs]="22">
+                <!-- 自定义富文本 -->
+                <quill-editor #contentText 
+                    [modules]="quillConfig"
+                    (onEditorCreated)="EditorCreated($event)"
+                    [style]="{height: '460px', width: '100%'}" 
+                    [(ngModel)]="content"
+                    (ngModelChange)="contentChange()"
+                    placeholder="请输入文章内容...">
+                </quill-editor>
+            </div>
+        </div>
+    </div>
+
+    <!-- 按钮 -->
+    <div nz-row style="margin-top:14px;">
+        <div nz-col>
+            <button nz-button (click)="goBack()" class="margin-right-12">返回</button>
+            <button nz-button class="margin-right-12" *ngIf="article_id && hasResource('article_discard_action')" (click)="discard()">废弃</button>
+            <button nz-button (click)="viewContent()" class="margin-right-12">预览</button>
+            <!-- <button nz-button [disabled]="saveDisabled" (click)="saveData()" class="margin-right-12" [nzLoading]="isSaving"> -->
+            <button nz-button [disabled]="validateForm.status === 'INVALID' || !titleIcon || !content || isSaving" (click)="checkSubmitContent()" class="margin-right-12" [nzLoading]="isSaving">
+                <span>暂存</span>
+            </button>
+            <button nz-button (click)="checkSubmitContent('submit')" [disabled]="validateForm.status === 'INVALID' || !titleIcon || !content || isSaving"
+                [nzLoading]="isSubmit">
+                <span>提交</span>
+            </button>
+        </div>
+    </div>
+
+    <app-spinner [isRunning]="isSaving || isSubmit"> </app-spinner>
+</section>
+
+
+<!-- 预览 -->
+<nz-modal [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="isVisible = false"
+    nzWidth="1000px">
+    <ng-template #modalTitle>
+        文章预览
+    </ng-template>
+    <ng-template #modalContent>
+        <section class="article-view">
+            <!-- 文章信息 -->
+            <nz-popover [(nzVisible)]="visible" [nzTitle]="'标题图'" [nzTrigger]="'click'" [nzPlacement]="'bottom'">
+                <span style="margin-left:0;" class="preview-text" nz-popover>标题图</span>
+                <ng-template #nzTemplate>
+                    <img style="width:200px;" [src]="titleIcon" alt="标题图">
+                </ng-template>
+            </nz-popover>
+
+            <h2 class="article-title" style="margin-top: 10px;">
+                <span>{{validateForm.value.title}}</span>
+            </h2>
+            <p class="subtitle">{{validateForm.value.subtitle}}</p>
+            <p class="author">{{validateForm.value.author}}</p>
+            <div [innerHTML]="content | html" *ngIf="content" class="article-content ql-editor">
+            </div>
+            <div #contentWrap *ngIf="content" class="article-content">
+            </div>
+        </section>
+    </ng-template>
+    <ng-template #modalFooter>
+        <button nz-button (click)="isVisible = false">
+            关 闭
+        </button>
+    </ng-template>
+</nz-modal>
