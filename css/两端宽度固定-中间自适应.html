@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两端宽度固定-中间自适应</title>
+    <style>
+        .wrap{
+            display: flex;
+        }
+        .w-100{
+            width:100px;
+            background-color: chartreuse;
+        }
+        .center-item{
+            flex: 1;
+            background-color: crimson;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <p class="w-100">1</p>
+        <p class="center-item">2</p>
+        <p class="w-100">3</p>
+    </div>
+</body>
+</html>

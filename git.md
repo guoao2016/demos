@@ -33,7 +33,9 @@
 
     `
         git reset --hard (commit id)
+        git push origin HEAD --force #远程提交回退
     `
+
 
 3.  关联远程版本库
     ssh-keygen -t rsa -C "youremail@example.com"

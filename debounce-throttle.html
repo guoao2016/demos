@@ -74,6 +74,7 @@
         return (...args) => {
             if(timer){
                 clearTimeout(timer)
+                console.log("timer: "+ timer)
             }
             timer = setTimeout(()=> {
                 func.apply(this, args)
@@ -84,7 +85,7 @@
     let _search = document.getElementById('search');
     _search.addEventListener('input', 
         debounce(() => {
-            console.log(i +"value: "+ _search.value)
+            console.log(i +" value: "+ _search.value)
             i+=1
         })
     )
