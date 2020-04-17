@@ -1,26 +1,18 @@
 dev todo 1  dev-5.1
 dev-5.1  bug
 bug
-<!DOCTYPE html>
+     
+
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>debounce-throttle</title>
      <style>
         .wrap{
             height: 5000px;
-=======
-    <title>dev-5.1</title>
-    <style>
-        .p1{
-
-        }
-        .p2{
-            height: 200px;
->>>>>>> dev-5.1-c
             background-color: blueviolet;
         }
     </style>
