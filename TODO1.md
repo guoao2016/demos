@@ -1,102 +1,108 @@
 dev todo 1  dev-5.1
 dev-5.1  bug
 bug
-     
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<<<<<<< HEAD
     <title>debounce-throttle</title>
      <style>
         .wrap{
             height: 5000px;
             background-color: blueviolet;
+=======
+    <title>冒泡-捕获</title>
+    <style>
+        #outer {
+            text-align: center;
+            width: 400px;
+            height: 400px;
+            background-color: #ccc;
+            margin: 0 auto;
+        }
+
+        #middle {
+            width: 250px;
+            height: 250px;
+            background-color: #f00;
+            margin: 0 auto;
+        }
+
+        #inner {
+            width: 100px;
+            height: 100px;
+            background-color: #0f0;
+            margin: 0 auto;
+>>>>>>> dev-5.1
         }
     </style>
 </head>
+
 <body>
-    搜索 <input id="search">
-    <div class="wrap">
+    <div id='outer'>
+        <span>outer</span>
+        <div id='middle'>
+            <span>middle</span>
+            <div id='inner'>
+                <span>inner</span>
+            </div>
+        </div>
     </div>
     <script>
-        // function debounce(func, wait = 500) {
-        //     let timer = 0;
-        //     return (...arg) => {
-        //         if(timer){
-        //             clearTimeout(timer)
-        //         }
-
-        //         timer = setTimeout(() => {
-        //             func.apply(this, arg)
-        //             }, wait)
-        //     }
-        // }
-
-
-        // function test(){
-        //     console.log(111)
-        // }
-
-        // window.addEventListener('scroll', debounce(test))
-    </script>
-    <script>
-        /**
-         * 节流
-         * 图片懒加载
-        */
-        const throttle = (func, wait = 500) => {
-            //  无论你调用多少次，函数都是100毫秒执行一次
-          let lastTime = 0;
-          return (...args) => {
-              let now = new Date().getTime();
-              if(now - lastTime > wait){
-                //  时间差
-                  func.apply(this, args)
-                  lastTime = new Date().getTime();
-              }
-          }
-            
-
+        function $(element){
+            return document.getElementById(element);
         }
-        let i = 1;
-        // window.addEventListener('scroll', 
-        //     throttle(() => {
-        //         console.log(i)
-        //         i+=1
-        //     })
-        // )
 
-    /**
-     * 防抖
-     * 输入搜索
-     * 每次出入都发送请求，容易请求过多
-    */
-    const debounce = (func, wait = 300) => {
-        let timer = 0;
-        return (...args) => {
-            if(timer){
-                clearTimeout(timer)
-                console.log("timer: "+ timer)
+        function on(element,event_name,handler,use_capture){
+            if(addEventListener){
+                $(element).addEventListener(event_name,handler,use_capture);
+                }
+            else{
+                $(element).attachEvent('on'+event_name,handler);
             }
-            timer = setTimeout(()=> {
-                func.apply(this, args)
-            }, wait)
         }
-    }
-  
-    let _search = document.getElementById('search');
-    _search.addEventListener('input', 
-        debounce(() => {
-            console.log(i +" value: "+ _search.value)
-            i+=1
-        })
-    )
 
+        on("outer","click",o_click_c,true);
+        on("middle","click",m_click_c,true);
+        on("inner","click",i_click_c,true);
+
+        on("outer","click",o_click_b,false);
+        on("middle","click",m_click_b,false);
+        on("inner","click",i_click_b,false);
+
+
+
+        function o_click_c(){
+            console.log("outer_捕获");
+        }
+
+        function m_click_c(){
+            console.log("middle_捕获");
+        }
+
+        function i_click_c(){
+            console.log("inner_捕获");
+        }
+
+        function o_click_b(){
+            console.log("outer_冒泡");
+        }
+
+        function m_click_b(){
+            console.log("middle_冒泡");
+        }
+
+        function i_click_b(){
+            console.log("inner_冒泡");
+        }
     </script>
 </body>
+
 </html>
 
 
