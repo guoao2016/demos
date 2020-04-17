@@ -49,6 +49,11 @@
     github  deploy keys
     ssh-keygen -t rsa -C "1044914567@qq.com"
     id_rsa.pub
+ssh-keygen -t rsa -C "guo.ao@topsports.com.cn"
+
+--- 报错refusing to merge unrelated histories
+git pull origin master --allow-unrelated-histories
+git push origin master:master
 
 
 4. 删除分支

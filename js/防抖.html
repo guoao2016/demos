@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖</title>
+</head>
+<body>
+    <button id= "btn">点我</button>
+    <script>
+        let btn1 = document.getElementById('btn')
+        function debounce(func, wait = 1000){
+            let timer = null;
+            return ()=> {
+                if(timer){
+                    clearTimeout(timer)
+                }
+
+                timer = setTimeout(() => {
+                    func.apply(this)
+                }, wait)
+            }
+        }
+        function test(){console.log(1111)}
+        btn1.addEventListener('click', debounce(test))
+
+        
+    </script>
+</body>
+</html>
