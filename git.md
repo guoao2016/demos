@@ -57,7 +57,13 @@ git push origin master:master
 
 
 4. 删除分支
-    git branch -d <branch name>删除本地分支，再通过git push origin :<branch name>
+      `   
+        本地
+        git branch -d <branch name>删除本地分支，再通过git push origin :<branch name>
+        远程
+        git push origin --delete dev-5.1-c
+
+    `
 
 
 5. git stash
