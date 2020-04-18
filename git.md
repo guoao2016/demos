@@ -49,6 +49,12 @@
     github  deploy keys
     ssh-keygen -t rsa -C "1044914567@qq.com"
     id_rsa.pub
+    
+    `
+    git checkout -b dev
+    git push --set-upstream origin dev
+
+    `
 
 
 4. 删除分支
