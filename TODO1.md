@@ -24,3 +24,27 @@ bug
     <div class="angle"></div>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>img - srcset - sizes</title>
+</head>
+
+<body>
+    <img src="small.jpg " srcset="big.jpg 1440w, middle.jpg 800w, small.jpg 1x" />
+    <!-- <img src="small.jpg " srcset="big.jpg 800w, middle.jpg 600w, small.jpg 1x" /> -->
+    <!-- 上面的例子表示浏览器宽度达到 800px 则加载 middle.jpg ，达到 1400px 则加载 big.jpg。注意：像素密度描述只对固定宽度图片有效。 -->
+
+
+    <img src="big.jpg" srcset="big.jpg 1200w, middle.jpg 800w, small.jpg 320w"
+        sizes="(max-width: 320px) 300w, 1200w" />
+
+    <!-- 上面的例子表示浏览器视口为 320px 时图片宽度为 300px，其他情况为 1200px。 -->
+</body>
+
+</html>

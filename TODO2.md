@@ -47,3 +47,70 @@
 </body>
 </html>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex</title>
+    <style>
+        body{
+            margin:0;
+            padding: 0;
+        }
+        .wrap{
+            display:flex;
+            flex-direction: row;
+            place-content: flex-start center;
+        }
+        .wrap a {
+            flex:1;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size: 12px;
+            text-align:center;
+        }
+        .wrap a img{
+            width: 40px;
+            height: 40px;
+            margin: 4px 10px 2px;
+        }
+    </style>
+</head>
+</head>
+<body>
+
+    <div style="display:flex;">
+        <div style="width:100px;">1</div>
+        <div style="flex:1;">2</div>
+        <div style="width:100px;">3</div>
+    </div>
+
+    
+    <div class="wrap">
+        <a href="baidu.com">
+            <img src="https://gw.alicdn.com/tfs/TB1ISdWSFXXXXbFXXXXXXXXXXXX-146-147.png_110x10000.jpg_.webp">
+            <span>苏宁易购</span>
+        </a>
+        <a href="baidu.com">
+            <img src="https://gw.alicdn.com/tfs/TB1ISdWSFXXXXbFXXXXXXXXXXXX-146-147.png_110x10000.jpg_.webp">
+            <span>天猫超市</span>
+        </a>
+        <a href="baidu.com">
+            <img src="https://gw.alicdn.com/tfs/TB1ISdWSFXXXXbFXXXXXXXXXXXX-146-147.png_110x10000.jpg_.webp">
+            <span>天猫国际</span>
+        </a>
+        <a href="baidu.com">
+            <img src="https://gw.alicdn.com/tfs/TB1ISdWSFXXXXbFXXXXXXXXXXXX-146-147.png_110x10000.jpg_.webp">
+            <span>聚划算</span>
+        </a>
+        <a href="baidu.com">
+            <img src="https://gw.alicdn.com/tfs/TB1ISdWSFXXXXbFXXXXXXXXXXXX-146-147.png_110x10000.jpg_.webp">
+            <span>分类</span>
+        </a>
+    </div>
+    
+</body>
+</html>
+
