@@ -79,8 +79,9 @@ git push origin master:master
     
     指定
     git stash apply stash@{1} 
+    git stash drop stash@{0}  
     清空队列
-    git stash clea
+    git stash clear
 
 
 6. git tag
