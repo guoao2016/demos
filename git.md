@@ -7,7 +7,10 @@
     回退到上一版本
     git reset --hard HEAD^ 
     回退到指定版本
+    `
     git reset --hard (commit id)
+    git reset  fcd2093 a.js
+    `
 
 2. git checkout 
 
